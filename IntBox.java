@@ -4,6 +4,7 @@ class IntBox {
     IntBox(int x){
         this.x = x;
     }
+    IntBox(IntBox that){ this.x = that.x; }
 
     public void setX(int x) {
         this.x = x;
