@@ -9,5 +9,14 @@ class Triangle {
         this.x3 = x3;
     }
 
-    
+    static void makeTriangle(int n){
+        for(int i = 1; i <= n; i++){
+            for(int j = 1; j <= n; j++){
+                for(int k = 1; k <= n; k++){
+                    Triangle t = new Triangle(i, j, k);
+                    System.out.println(t.triangleType() + "(" + i + ", " + j + ", " + k + ")");
+                }
+            }
+        }
+    } // the method is static because it does not need to be stateful/depends on no class and is not passed anything non-static
 }
