@@ -28,8 +28,7 @@ class IntBox {
 
     @Override
     public String toString() {
-        String output = "IntBox(" + x + ")";
-        return output;
+        return new String("IntBox(" + x + ")");
     }
 
 
