@@ -22,6 +22,25 @@ class Triangle {
     } // the method is static because it does not need to be stateful/depends on no class and is not passed anything non-static
 
 
+    public String isImpossible() {
+        if (x1 < x2) {
+                        if (x2 < x3) {
+                            if (x1 + x2 < x3) return "Impossible";
+                        }
+                        if (x1 + x3 < x2) return "Impossible";
+                    }
+
+            if (x1 < x3) {
+                        if (x3 < x2) {
+                            if (x1 + x3 < x2) return "Impossible";
+                        }
+
+                        if (x1 + x2 < x3) return "Impossible";
+
+            }
+
+        return "";
+    }
     public String triangleType() {
         if (x1 == x2 && x2 == x3) {
             return "Equilateral";
@@ -29,19 +48,10 @@ class Triangle {
 
         //max
 
-        if (x1 < x2) {
-            if (x2 < x3) {
-                if (x1 + x2 < x3) return "Impossible";
-            }
-            if (x1 + x3 < x2) return "Impossible";
-        }
+        if ((x1 == x2) || (x2 == x3) || (x1 == x3)) {
+            
 
-        if (x1 < x3) {
-            if (x3 < x2) {
-                if (x1 + x3 < x2) return "Impossible";
-            }
-
-            if (x1 + x2 < x3) return "Impossible";
+            return "Isoceles";
         }
     }
 
