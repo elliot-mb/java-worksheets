@@ -46,7 +46,7 @@ class Triangle {
 
         if (x2 + x3 < x1) return "Impossible";
 
-        if (b) return "Isoceles";
+        if b return "Isoceles";
         return "Scalene";
     }
 
