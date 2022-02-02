@@ -21,38 +21,82 @@ class Triangle {
         }
     } // the method is static because it does not need to be stateful/depends on no class and is not passed anything non-static
 
+    //Helper Functions for triangle type
 
-    public String isImpossible() {
+    //if b = 1 returns Isoceles else returns scalene, Impossible if the lengths of the two smaller sides does not equal/exceed the largest side
+    public String isImpossible(boolean b) {
         if (x1 < x2) {
-                        if (x2 < x3) {
-                            if (x1 + x2 < x3) return "Impossible";
-                        }
-                        if (x1 + x3 < x2) return "Impossible";
-                    }
+            if (x2 < x3) {
+                if (x1 + x2 < x3) return "Impossible";
+            }
+            if (x1 + x3 < x2) return "Impossible";
+        }
 
-            if (x1 < x3) {
-                        if (x3 < x2) {
-                            if (x1 + x3 < x2) return "Impossible";
-                        }
-
-                        if (x1 + x2 < x3) return "Impossible";
-
+        if (x1 < x3) {
+            if (x3 < x2) {
+                if (x1 + x3 < x2) return "Impossible";
             }
 
-        return "";
+            if (x1 + x2 < x3) return "Impossible";
+
+        }
+
+        if (x2 + x3 < x1) return "Impossible";
+
+        if b return "Isoceles";
+        return "Scalene"
     }
+
+    //Finds largest side and checks that this is indeed the hypotenuse using Pythagoras' Theorem
+    public boolean isRight() {
+        if (x1 < x2) {
+            if (x2 < x3) {
+                if (Math.pow(x1, 2) + Math.pow(x2, 2) == Math.pow(x3, 2)) return true;
+            }
+
+            if (Math.pow(x1, 2) + Math.pow(x3, 2) == Math.pow(x2, 2)) return true;
+        }
+
+        if (x1 < x3) {
+            if (x3 < x2) {
+                if (Math.pow(x1, 2) + Math.pow(x3, 2) == Math.pow(x2, 2)) return true;
+            }
+
+            if (Math.pow(x1, 2) + Math.pow(x2, 2) == Math.pow(x3, 2)) return true;
+        }
+
+        if (Math.pow(x3, 2) + Math.pow(x2, 2) == Math.pow(x1, 2)) return true;
+        return false;
+    }
+
+    //A triangle is flat if the sum of any two sides is equal to the other side
+    public boolean isFlat() {
+        boolean case1 = x1 + x2 == x3;
+        boolean case2 = x2 + x3 == x1;
+        boolean case3 = x3 + x1 == x2;
+
+        if (case1 || case2 || case3) return true;
+
+        return false;
+    }
+
     public String triangleType() {
         if (x1 == x2 && x2 == x3) {
             return "Equilateral";
         }
 
-        //max
-
         if ((x1 == x2) || (x2 == x3) || (x1 == x3)) {
             
+            return isImpossible(true);
+        }
 
-            return "Isoceles";
+        if ((a != b) && (b != c) && (a != c)) {
+                if isRight() return "RightAngled";
+                if isFlat() return "Flat";
+                return isImpossible(false);
         }
     }
+
+    //Add override instance here
 
 }
