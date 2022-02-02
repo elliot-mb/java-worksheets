@@ -9,17 +9,20 @@ class Triangle {
         this.x3 = x3;
     }
 
-
     static void makeTriangle(int n){
         for(int i = 1; i <= n; i++){
             for(int j = 1; j <= n; j++){
-                for(int k = 1; k <= n; k++){
+                for(int k = 1; k <= n; k++){ //permutes
                     Triangle t = new Triangle(i, j, k);
-                    System.out.println(t.triangleType() + "(" + i + ", " + j + ", " + k + ")");
+                    System.out.println(t);
                 }
             }
         }
     } // the method is static because it does not need to be stateful/depends on no class and is not passed anything non-static
+
+    public String toString(){
+        return (this.triangleType() + "(" + this.x1 + ", " + this.x2 + ", " + this.x3 + ")");
+    }
 
     //Helper Functions for triangle type
 
@@ -43,8 +46,8 @@ class Triangle {
 
         if (x2 + x3 < x1) return "Impossible";
 
-        if b return "Isoceles";
-        return "Scalene"
+        if (b) return "Isoceles";
+        return "Scalene";
     }
 
     //Finds largest side and checks that this is indeed the hypotenuse using Pythagoras' Theorem
