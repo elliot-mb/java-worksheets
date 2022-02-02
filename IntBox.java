@@ -26,8 +26,10 @@ class IntBox {
         return this;
     }
 
+    @Override
     public String toString() {
-        System.out.println("IntBox(" + x + ")");
+        String output = "IntBox(" + x + ")";
+        return output;
     }
 
 
