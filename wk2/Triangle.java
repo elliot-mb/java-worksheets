@@ -28,6 +28,8 @@ class Triangle {
 
     //if b = 1 returns Isoceles else returns scalene, Impossible if the lengths of the two smaller sides does not equal/exceed the largest side
     public String isImpossible(boolean b) {
+
+        if (isFlat()) return "Flat";
         if (x1 < x2) {
             if (x2 < x3) {
                 if (x1 + x2 < x3) return "Impossible";
@@ -46,7 +48,7 @@ class Triangle {
 
         if (x2 + x3 < x1) return "Impossible";
 
-        if b return "Isoceles";
+        if (b) return "Isoceles";
         return "Scalene";
     }
 
@@ -93,11 +95,13 @@ class Triangle {
             return isImpossible(true);
         }
 
-        if ((a != b) && (b != c) && (a != c)) {
-                if isRight() return "RightAngled";
-                if isFlat() return "Flat";
+        if ((x1 != x2) && (x2 != x3) && (x1 != x3)) {
+                if (isRight()) return "RightAngled";
+                if (isFlat()) return "Flat";
                 return isImpossible(false);
         }
+
+        return "";
     }
 
     //Add override instance here
