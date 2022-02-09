@@ -6,6 +6,7 @@ public class ErrorOrResult {
     // <Integer>equal(a, b)
     ErrorOrResult(){
 
+<<<<<<< HEAD
     }
 
     ErrorOrResult(){
@@ -19,12 +20,21 @@ public class ErrorOrResult {
             error(e);
         }
         return
+=======
+    //don't push until msg Elliot
+    static ErrorOrResult parseIntOrFail (String input){
+        ErrorOrResult err = new ErrorOrResult();
+>>>>>>> cb1aa62 (Resolve conflict)
     }
     static boolean failed() {
 
     }
 
+<<<<<<< HEAD
     static String error(NumberFormatException e) throws NoSuchElementException {
+=======
+    static String error() throws NoSuchElementException {
+>>>>>>> cb1aa62 (Resolve conflict)
         if (failed()) return "error message";
         else throw new NoSuchElementException(e);
     }
