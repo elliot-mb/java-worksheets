@@ -4,15 +4,12 @@ public class TestUtils {
 
     }
 
-    static void assertEquals(int i, int j, String s) {
-        if(i != j) throw new AssertionError(s);
-    }
+    static void assertUniversalEquals(int i, String s, String e) { throw new AssertionError(e); }
+    static void assertUniversalEquals(String s, int i, String e) { throw new AssertionError(e); }
 
     static void assertUniversalEquals(int i, int j, String e) { assertEquals(i, j, e); }
-    static void assertUniversalEquals(int i, String s, String e) { throw new AssertionError(e); }
-
-    static void assertUniversalEquals(String s, int i, String e) {
-        throw new AssertionError(e);
+    static void assertEquals(int i, int j, String s) {
+        if(i != j) throw new AssertionError(s);
     }
 
     static void assertUniversalEquals(String s1, String s2, String e) {
