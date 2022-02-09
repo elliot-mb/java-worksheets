@@ -11,9 +11,13 @@ public class TestUtils {
     public void assertUniversalEquals(int i, int j, String e) { assertEquals(i, j, e); }
     public void assertUniversalEquals(int i, String s, String e) { throw new AssertionError(e); }
 
-    public void assertUniversalEquals() {
+    public void assertUniversalEquals(String s, int i, String e) {
+        throw new AssertionError(e);
+    }
 
-    };
+    public void assertUniversalEquals(String s1, String s2, String e) {
+        assertEquals(s1, s2, e);
+    }
 
     public static void main(String[] args) {
         String str1 = "hello";
