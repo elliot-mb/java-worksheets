@@ -1,5 +1,4 @@
 public class TestUtils {
-<<<<<<< HEAD
     static void assertEquals(String s1, String s2, String s3) throws AssertionError {
         if (!(s1.equals(s2))) throw new AssertionError(s3);
 
@@ -9,7 +8,12 @@ public class TestUtils {
         if(i != j) throw new AssertionError(s);
     }
 
-    public void assertUniversalEquals() {};
+    public void assertUniversalEquals(int i, int j, String e) { assertEquals(i, j, e); }
+    public void assertUniversalEquals(int i, String s, String e) { throw new AssertionError(e); }
+
+    public void assertUniversalEquals() {
+
+    };
 
     public static void main(String[] args) {
         String str1 = "hello";
