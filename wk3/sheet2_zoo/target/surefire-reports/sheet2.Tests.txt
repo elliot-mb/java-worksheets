@@ -1,8 +1,13 @@
 -------------------------------------------------------------------------------
 Test set: sheet2.Tests
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.077 s <<< FAILURE! - in sheet2.Tests
 sheet2.Tests.test3  Time elapsed: 0.012 s  <<< FAILURE!
+=======
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.109 s <<< FAILURE! - in sheet2.Tests
+sheet2.Tests.test3  Time elapsed: 0.015 s  <<< FAILURE!
+>>>>>>> b2e9454 (Implm choc)
 org.junit.ComparisonFailure: Feeding Foods to Animals: expected:<animal eats f[ruit]> but was:<animal eats f[ood]>
 	at org.junit.Assert.assertEquals(Assert.java:117)
 	at sheet2.Tests.test3(Tests.java:46)

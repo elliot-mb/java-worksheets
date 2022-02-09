@@ -2,6 +2,6 @@ package sheet2;
 
 public class Chocolate extends Food {
 
-	//TODO:
-
+    public String eaten(Animal animal) {return "animal eats chocolate"; }
+    public String eaten(Dog d) { return "dog eats chocolate"; }
 }
