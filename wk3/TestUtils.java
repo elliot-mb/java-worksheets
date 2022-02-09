@@ -20,13 +20,13 @@ public class TestUtils {
     }
 
     public static void main(String[] args) {
-//        String str1 = "hello";
-//        String str2 = "hello";
-//        String str3 = "Hello";
-//        String str4 = "mind";
-//        assertEquals(str1, str2, "error: expecting " + str1 + " but was " + str2);
-//        assertEquals(str2, str3, "error: expecting " + str2 + " but was " + str3);
-//        assertEquals(str1, str4, "error: expecting " + str1 + " but was " + str4);
+        String str1 = "hello";
+        String str2 = "hello";
+        String str3 = "Hello";
+        String str4 = "mind";
+        assertEquals(str1, str2, "error: expecting " + str1 + " but was " + str2);
+        assertEquals(str2, str3, "error: expecting " + str2 + " but was " + str3);
+        assertEquals(str1, str4, "error: expecting " + str1 + " but was " + str4);
 
         assertUniversalEquals(1, 2, "Err!"); // Err!: expecting 1(class java.lang.Integer) but got 2(class java.lang.Integer)
         assertUniversalEquals("1", "2", "Err!"); // Err!: expecting 1(class java.lang.String) but got 2(class java.lang.String)
