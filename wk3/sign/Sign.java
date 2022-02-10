@@ -7,8 +7,9 @@ public enum Sign {
         this.symbol = symbol;
     }
 
-    public void tooString(){
-        System.out.println(this.symbol);
+    public String toString(){
+        String val = this.symbol;
+        return val;
     }
 
     public Sign flip(){
