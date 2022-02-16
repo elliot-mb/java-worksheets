@@ -9,12 +9,13 @@ public class EqualsGeneric {
     static <T> List<T> reverse(List<T> list) {
         List<T> reversedList = new ArrayList<T>();
 
-        int n = list.size();
+        int n = list.size() - 1;
 
         int i = n;
 
         while (i > -1) {
             reversedList.add(list.get(i));
+            i--;
         }
 
         return reversedList;
