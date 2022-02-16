@@ -5,7 +5,7 @@ public class ROT13Formatter implements Formatter{
         char[] chars = s.toCharArray();
         String result = "";
         for(char c : chars){
-            result += c + 13;
+            result += (char) (c + 13);
         }
         return result;
     }
