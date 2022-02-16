@@ -6,7 +6,7 @@ public class OnceUponATime {
 
     public static Integer estimateHeatingBillPCM(House house) {
         BillsVisitor bobby = new BillsVisitor();
-        house.accept(bobby);
+        return house.accept(bobby);
     }
 
     public static String letMeComeIn(House house) {
