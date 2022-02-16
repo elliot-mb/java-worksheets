@@ -1,6 +1,7 @@
 public class OnceUponATime {
     public static Integer estimateRentPCM(House house) {
-        return -1;
+        ChartedSurveyor billy = new ChartedSurveyor();
+        return house.accept(billy);
     }
 
     public static Integer estimateHeatingBillPCM(House house) {
