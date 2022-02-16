@@ -1,11 +1,26 @@
 public class OnceUponATime {
+
     public static Integer estimateRentPCM(House house) {
         ChartedSurveyor billy = new ChartedSurveyor();
         return house.accept(billy);
     }
 
     public static Integer estimateHeatingBillPCM(House house) {
+        /*
         BillsVisitor bobby = new BillsVisitor();
+        return house.accept(bobby);*/
+        class UnwantedBillsVisitor implements House.Visitor<Integer>{
+            public Integer visit(StrawHouse sr){
+                return 4;
+            }
+            public Integer visit(StickHouse si){
+                return 11;
+            }
+            public Integer visit(BrickHouse bi){
+                return 3;
+            }
+        }
+        UnwantedBillsVisitor bobby = new UnwantedBillsVisitor();
         return house.accept(bobby);
     }
 
@@ -26,4 +41,5 @@ public class OnceUponATime {
         }
 
     }
+
 }
