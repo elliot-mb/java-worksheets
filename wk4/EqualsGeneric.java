@@ -6,7 +6,7 @@ public class EqualsGeneric {
         return left.equals(right);
     }
 
-    static List<T> reverse(List<T> list) {
+    static <T> List<T> reverse(List<T> list) {
         List<T> reversedList = new ArrayList<T>();
 
         int n = list.size();
