@@ -12,7 +12,12 @@ public class BigBadWolf implements House.Visitor<String> {
         return name + "'s huffed and he puffed and he blew " +  house.occupant.name + "'s house down!";
     }
     public String visit(BrickHouse house) {
-        return name + " huffed and he puffed but he couldn't blow " + house.occupant.name + "'s house down!";
+        
+        if (house.potBoiling) return name + " climbed down " + house.occupant.name + "'s chimney and fell into a pot of boiling water shooting him straight up and back into the woods!";
+        else {
+            house.occupant.hp = 0;
+            return name + " climbed down " + house.occupant.name + "'s chimney and devoured the three pigs!";   
+        }
     }
 
 }
