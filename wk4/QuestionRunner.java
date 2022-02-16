@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.IdentityHashMap;
 
 public class QuestionRunner {
     public static void main(String[] args){
@@ -12,9 +13,19 @@ public class QuestionRunner {
         System.out.println(EqualsGeneric.reverse(new ArrayList<String>(Arrays.asList("a","b","c","d"))));
 
         //Question 4
-        Unit u1 = new Unit();
-        Unit u2 = new Unit();
+        Unit u1 = Unit.getUnit();
+        Unit u2 = Unit.getUnit();
 
         System.out.println(u1==u2);
+
+        //Question 5
+        IdentityFormatter id = new IdentityFormatter();
+        UppercaseFormatter upper = new UppercaseFormatter();
+        ROT13Formatter rot13 = new ROT13Formatter();
+
+        String test1 = "Hello world!";
+        System.out.println(id.format(test1)); //Hello world!
+        System.out.println(upper.format(test1)); // HELLO WORLD!
+        System.out.println(rot13.format(test1)); //Uryyb jbeyq!
     }
 }
