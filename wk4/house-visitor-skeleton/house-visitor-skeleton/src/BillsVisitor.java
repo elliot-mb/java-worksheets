@@ -1,4 +1,4 @@
-public class BillsVisitor<Integer> implements House.Visitor<java.lang.Integer> {
+public class BillsVisitor implements House.Visitor<Integer> {
 
     public Integer visit(StrawHouse sr){
         return 3;
