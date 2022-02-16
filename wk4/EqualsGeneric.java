@@ -9,8 +9,7 @@ public class EqualsGeneric {
     static <T> List<T> reverse(List<T> list) {
         List<T> reversedList = new ArrayList<T>();
 
-        int n = list.size() - 1;
-
+        int n = list.size()-1;
         int i = n;
 
         while (i > -1) {
