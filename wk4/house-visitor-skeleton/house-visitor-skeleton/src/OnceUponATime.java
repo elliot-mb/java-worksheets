@@ -10,7 +10,8 @@ public class OnceUponATime {
     }
 
     public static String letMeComeIn(House house) {
-        return "";
+        BigBadWolf wolf = new BigBadWolf("Wolf");
+        return house.accept(wolf);
     }
 
     public static void main(String[] args) {
