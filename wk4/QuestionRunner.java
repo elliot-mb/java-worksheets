@@ -10,5 +10,11 @@ public class QuestionRunner {
 
         System.out.println(EqualsGeneric.reverse(new ArrayList<Integer>(Arrays.asList(1,2,3,4))));
         System.out.println(EqualsGeneric.reverse(new ArrayList<String>(Arrays.asList("a","b","c","d"))));
+
+        //Question 4
+        Unit u1 = new Unit();
+        Unit u2 = new Unit();
+
+        System.out.println(u1==u2);
     }
 }
