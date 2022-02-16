@@ -27,5 +27,8 @@ public class QuestionRunner {
         System.out.println(id.format(test1)); //Hello world!
         System.out.println(upper.format(test1)); // HELLO WORLD!
         System.out.println(rot13.format(test1)); //Uryyb jbeyq!
+
+        BigExcinctKiwi bek = new BigExcinctKiwi();
+        bek.fly();
     }
 }
