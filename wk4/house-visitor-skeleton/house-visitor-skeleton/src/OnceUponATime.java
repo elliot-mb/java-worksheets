@@ -5,11 +5,14 @@ public class OnceUponATime {
         return house.accept(billy);
     }
 
+
+
     public static Integer estimateHeatingBillPCM(House house) {
-        /*
+        /* // outer class
         BillsVisitor bobby = new BillsVisitor();
         return house.accept(bobby);*/
-        class UnwantedBillsVisitor implements House.Visitor<Integer>{
+        /* //inner class
+        class InnerBillsVisitor implements House.Visitor<Integer>{
             public Integer visit(StrawHouse sr){
                 return 4;
             }
@@ -20,8 +23,23 @@ public class OnceUponATime {
                 return 3;
             }
         }
-        UnwantedBillsVisitor bobby = new UnwantedBillsVisitor();
-        return house.accept(bobby);
+        InnerBillsVisitor bobby = new InnerBillsVisitor();
+        return house.accept(bobby); */
+
+        House.Visitor<Integer> askedToRemainAnonymous = new House.Visitor<Integer>() {
+            public Integer visit(StrawHouse house) {
+                return 4;
+            }
+
+            public Integer visit(StickHouse house) {
+                return 11;
+            }
+
+            public Integer visit(BrickHouse house) {
+                return 3;
+            }
+        };
+        return house.accept(askedToRemainAnonymous);
     }
 
     public static String letMeComeIn(House house) {
