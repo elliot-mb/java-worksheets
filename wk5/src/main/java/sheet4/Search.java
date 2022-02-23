@@ -5,6 +5,7 @@ import com.google.common.graph.ImmutableValueGraph.Builder;
 import com.google.common.graph.ValueGraphBuilder;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -62,7 +63,26 @@ public class Search {
 	 */
 	static Set<Integer> findAllNodesWithEdgeSumGreaterThan20(
 			ImmutableValueGraph<Integer, Integer> graph) {
-		throw new UnsupportedOperationException("Implement me");
+		Object[] nodes = listAllNodes(graph).toArray();
+		Set<Integer> satisfy = new HashSet<Integer>();
+
+		
+		for (Object node : nodes) {
+			List<Integer> edges = new ArrayList<Integer>();
+			for (int i = 0; i < nodes.length; i++) {
+				if (graph.edgeValue((Integer) node, (Integer) nodes[i]).isPresent()) {
+					Integer edgeValue = graph.edgeValue((Integer) node, (Integer) nodes[i]).get();
+					edges.add(edgeValue);
+				}
+			}
+			Integer sum = 0;
+			for (Integer edge : edges) { sum += edge; }
+
+
+			if (sum > 20) { satisfy.add((Integer) node); }
+		}
+
+		return satisfy;
 	}
 
 
