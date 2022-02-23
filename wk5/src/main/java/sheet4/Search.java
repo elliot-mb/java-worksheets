@@ -4,6 +4,7 @@ import com.google.common.graph.ImmutableValueGraph;
 import com.google.common.graph.ImmutableValueGraph.Builder;
 import com.google.common.graph.ValueGraphBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,7 +29,16 @@ public class Search {
 	 * @return list of all the edges in the given graph, the order is not important
 	 */
 	static List<Integer> listAllEdgeValues(ImmutableValueGraph<Integer, Integer> graph) {
-		throw new UnsupportedOperationException("Implement me");
+		Object[] nodes = graph.nodes().toArray();
+		List<Integer> edges = new ArrayList<Integer>();
+		for(int i = 0; i < nodes.length; i++){
+			for(int j = i; j < nodes.length; j++){
+				if(graph.edgeValue((Integer) nodes[i], (Integer) nodes[j]).isPresent()){
+					edges.add(graph.edgeValue((Integer) nodes[i], (Integer) nodes[j]).get());
+				}
+			}
+		}
+		return edges;
 	}
 
 	/**
