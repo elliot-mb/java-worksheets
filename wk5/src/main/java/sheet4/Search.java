@@ -18,7 +18,7 @@ public class Search {
 	 * @return set of all the nodes in the given graph
 	 */
 	static Set<Integer> listAllNodes(ImmutableValueGraph<Integer, Integer> graph) {
-		throw new UnsupportedOperationException("Implement me");
+		return graph.nodes();
 	}
 
 	/**
