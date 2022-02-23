@@ -4,10 +4,12 @@ import com.google.common.graph.ImmutableValueGraph;
 import com.google.common.graph.ImmutableValueGraph.Builder;
 import com.google.common.graph.ValueGraphBuilder;
 
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -50,7 +52,14 @@ public class Search {
 	 */
 	static Set<Integer> findAllNodeWith4OrMoreEdges(
 			ImmutableValueGraph<Integer, Integer> graph) {
-		throw new UnsupportedOperationException("Implement me");
+		Object[] nodes = graph.nodes().toArray();
+		Set<Integer> nodes40 = new HashSet<>();
+		for(int i = 0; i < Search.listAllNodes(graph).size(); i++){
+			if(graph.degree((Integer) nodes[i]) >= 4){
+				nodes40.add((Integer) nodes[i]);
+			}
+		}
+		return nodes40;
 	}
 
 	/**
