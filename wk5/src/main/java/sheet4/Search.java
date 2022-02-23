@@ -135,21 +135,20 @@ public class Search {
 
 		while (currentNode != destination) {
 			//getting successors
-			Object[] succ = graph.successors((Integer) currentNode).toArray();
+			Object[] succ = graph.successors((Integer) currentNode).toArray(); //all adjacent nodes
 			Integer min = Integer.MAX_VALUE;
-			Integer bestNode = -1;
+			Integer bestNode = -1; //closest node
 
-			for (Object node : succ) {
-				if(graph.edgeValue((Integer) node, (Integer) currentNode).isPresent()) {
-					Integer edgeVal = graph.edgeValue((Integer) node, (Integer) currentNode).get();
-					Integer distance = (nodeDict.get((Integer) currentNode).get(0) + edgeVal);
-					if(distance < min){
-						min = distance;
-						bestNode = (Integer) node;
-					}
-					if (distance < (nodeDict.get((Integer) node).get(0))){
-						nodeDict.put((Integer) node, new ArrayList<Integer>(Arrays.asList(distance, (Integer) currentNode)));
-					}
+			for (Object node : succ) { //forall connected nodes
+				//removed redundant check for an edge (this loop only checks connected nodes)
+				Integer edgeVal = graph.edgeValue((Integer) node, (Integer) currentNode).get();
+				Integer distance = (nodeDict.get((Integer) currentNode).get(0) + edgeVal);
+				if(distance < min){
+					min = distance;
+					bestNode = (Integer) node;
+				}
+				if (distance < (nodeDict.get((Integer) node).get(0))) {
+					nodeDict.put((Integer) node, new ArrayList<Integer>(Arrays.asList(distance, (Integer) currentNode)));
 				}
 			}
 
