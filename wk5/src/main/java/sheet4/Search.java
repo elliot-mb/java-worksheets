@@ -1,5 +1,6 @@
 package sheet4;
 
+import com.google.common.graph.EndpointPair;
 import com.google.common.graph.ImmutableValueGraph;
 import com.google.common.graph.ImmutableValueGraph.Builder;
 import com.google.common.graph.ValueGraphBuilder;
@@ -109,11 +110,51 @@ public class Search {
 	 * @return a list of nodes that represent the shortest path from source to destination where
 	 * the first element is the source and the last element is the destination
 	 */
+	static Dictionary<Integer, ArrayList<Integer>> populate(Dictionary<Integer, ArrayList<Integer>> nodeDict,
+															ImmutableValueGraph<Integer, Integer> graph, Integer source){
+		nodeDict.put(source, new ArrayList<Integer>(Arrays.asList(0, null)));
+		for(Object n : graph.nodes()){
+			if((Integer) n != source) {
+				nodeDict.put((Integer) n, new ArrayList<Integer>(Arrays.asList(Integer.MAX_VALUE, null)));
+			}
+		}
+		return nodeDict;
+	}
+
 	static List<Integer> shortestPathFromSourceToDestination(
 			ImmutableValueGraph<Integer, Integer> graph,
 			Integer source,
 			Integer destination) {
-		throw new UnsupportedOperationException("Implement me");
+		Dictionary<Integer, ArrayList<Integer>> nodeDict = new Hashtable<Integer, ArrayList<Integer>>();
+		Object[] nodes = listAllNodes(graph).toArray();
+
+		//Object sourceNode = nodeDict.get(source);
+		nodeDict = populate(nodeDict, graph, source);
+
+		Object currentNode = nodeDict.get(source);
+
+		while (currentNode != destination) {
+			//getting successors
+			Object[] succ = graph.successors((Integer) currentNode).toArray();
+			Integer min = Integer.MAX_VALUE;
+			Integer bestNode = -1;
+
+			for (Object node : succ) {
+				if(graph.edgeValue((Integer) node, (Integer) currentNode).isPresent()) {
+					Integer edgeVal = graph.edgeValue((Integer) node, (Integer) currentNode).get();
+					Integer distance = (nodeDict.get((Integer) currentNode).get(0) + edgeVal);
+					if(distance < min){
+						min = distance;
+						bestNode = (Integer) node;
+					}
+					if (distance < (nodeDict.get((Integer) node).get(0))){
+						nodeDict.put((Integer) node, new ArrayList<Integer>(Arrays.asList(distance, (Integer) currentNode)));
+					}
+				}
+			}
+
+			currentNode = nodeDict.get(bestNode);
+		}
 	}
 
 	// reads in a graph stored in plan text, not part of any question but feel free to study at how
