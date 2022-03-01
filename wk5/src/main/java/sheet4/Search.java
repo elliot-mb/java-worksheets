@@ -121,39 +121,83 @@ public class Search {
 		return nodeDict;
 	}
 
+	static boolean searchList(Integer[] nodes, Integer x) {
+		return Arrays.asList(nodes).contains(x);
+	}
+
 	static List<Integer> shortestPathFromSourceToDestination(
 			ImmutableValueGraph<Integer, Integer> graph,
 			Integer source,
 			Integer destination) {
 		Dictionary<Integer, ArrayList<Integer>> nodeDict = new Hashtable<Integer, ArrayList<Integer>>();
-		Object[] nodes = listAllNodes(graph).toArray();
 
 		//Object sourceNode = nodeDict.get(source);
 		nodeDict = populate(nodeDict, graph, source);
 
-		Object currentNode = nodeDict.get(source);
+		Object currentNode = source;
 
-		while (currentNode != destination) {
+		
+		int pos = 0;
+		Integer[] visitedNodes = new Integer[35];
+		Integer min = Integer.MAX_VALUE;
+		Integer bestNode = -1;
+		while ((Integer) currentNode != destination) {
+			System.out.println(currentNode);
+			
 			//getting successors
-			Object[] succ = graph.successors((Integer) currentNode).toArray(); //all adjacent nodes
-			Integer min = Integer.MAX_VALUE;
-			Integer bestNode = -1; //closest node
+			Object[] succ = graph.successors((Integer) currentNode).toArray();
+			System.out.println(succ);
+			
+			
 
-			for (Object node : succ) { //forall connected nodes
-				//removed redundant check for an edge (this loop only checks connected nodes)
-				Integer edgeVal = graph.edgeValue((Integer) node, (Integer) currentNode).get();
-				Integer distance = (nodeDict.get((Integer) currentNode).get(0) + edgeVal);
-				if(distance < min){
-					min = distance;
-					bestNode = (Integer) node;
-				}
-				if (distance < (nodeDict.get((Integer) node).get(0))) {
-					nodeDict.put((Integer) node, new ArrayList<Integer>(Arrays.asList(distance, (Integer) currentNode)));
-				}
+			for (Object node : succ) {
+				System.out.print(node + " ");
 			}
 
-			currentNode = nodeDict.get(bestNode);
+			System.out.println("");
+
+			for (Object node : succ) {
+				
+				//gets the current node's min value from paths
+				
+				System.out.println("Min is " + min);
+				if(graph.edgeValue((Integer) node, (Integer) currentNode).isPresent() && Search.searchList(visitedNodes, (Integer)node) == false && (Integer)node != source) {
+					
+					//gets distance between node and current node
+					Integer edgeVal = graph.edgeValue((Integer) node, (Integer) currentNode).get();
+					//calculates the total distance (incl. previous path)
+					Integer distance = (nodeDict.get((Integer) currentNode).get(0) + edgeVal);
+					System.out.println("Node: " + (Integer)node + " Edge Value: " + edgeVal +  " Distance: " + distance + " Predecessor: " + nodeDict.get((Integer) node).get(1));
+					//if this is less than the current key value held in the node, replace and is now
+					//best node
+					if(distance < min ){
+						min = distance;
+						bestNode = (Integer) node;
+						System.out.println("Best Node is " + bestNode);
+					}
+
+					if (searchList(visitedNodes, bestNode)) min = distance;
+					//update table respectively
+					if (distance < (nodeDict.get((Integer) node).get(0))){
+						nodeDict.put((Integer) node, new ArrayList<Integer>(Arrays.asList(distance, (Integer) currentNode)));
+					}
+					
+				}
+			}
+			visitedNodes[pos] = (Integer)currentNode;
+			currentNode = bestNode;
+			pos++;
 		}
+
+		List<Integer> path = new ArrayList<Integer>();
+
+		while (currentNode != source) {
+			path.add((Integer) currentNode);
+			currentNode = nodeDict.get(currentNode).get(1);
+		}
+
+		return path;
+
 	}
 
 	// reads in a graph stored in plan text, not part of any question but feel free to study at how
