@@ -131,6 +131,8 @@ public class Search {
 			Integer destination) {
 		Dictionary<Integer, ArrayList<Integer>> nodeDict = new Hashtable<Integer, ArrayList<Integer>>();
 
+		System.out.println("I WANT TO GO TO " + destination + ", STARTING AT " + source);
+
 		//Object sourceNode = nodeDict.get(source);
 		nodeDict = populate(nodeDict, graph, source);
 
@@ -142,13 +144,13 @@ public class Search {
 		Integer min = Integer.MAX_VALUE;
 		Integer bestNode = -1;
 		while ((Integer) currentNode != destination) {
+			//min = Integer.MAX_VALUE;
+
 			System.out.println(currentNode);
 			
 			//getting successors
 			Object[] succ = graph.successors((Integer) currentNode).toArray();
-			System.out.println(succ);
-			
-			
+			//System.out.println(succ); just prints a memory address
 
 			for (Object node : succ) {
 				System.out.print(node + " ");
@@ -160,9 +162,10 @@ public class Search {
 				
 				//gets the current node's min value from paths
 				
-				System.out.println("Min is " + min);
+				//System.out.println("Min is " + min);
 				if(graph.edgeValue((Integer) node, (Integer) currentNode).isPresent() && Search.searchList(visitedNodes, (Integer)node) == false && (Integer)node != source) {
-					
+					System.out.println("Min so far is " + min); //just gonna pop this in here to know its talking about nodes its still to visit
+
 					//gets distance between node and current node
 					Integer edgeVal = graph.edgeValue((Integer) node, (Integer) currentNode).get();
 					//calculates the total distance (incl. previous path)
@@ -170,7 +173,7 @@ public class Search {
 					System.out.println("Node: " + (Integer)node + " Edge Value: " + edgeVal +  " Distance: " + distance + " Predecessor: " + nodeDict.get((Integer) node).get(1));
 					//if this is less than the current key value held in the node, replace and is now
 					//best node
-					if(distance < min ){
+					if(distance < min){
 						min = distance;
 						bestNode = (Integer) node;
 						System.out.println("Best Node is " + bestNode);
