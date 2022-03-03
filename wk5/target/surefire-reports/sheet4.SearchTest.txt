@@ -1,10 +1,10 @@
 -------------------------------------------------------------------------------
 Test set: sheet4.SearchTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.319 s <<< FAILURE! - in sheet4.SearchTest
-testShortestPath(sheet4.SearchTest)  Time elapsed: 0.169 s  <<< ERROR!
+Tests run: 5, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.278 s <<< FAILURE! - in sheet4.SearchTest
+testShortestPath(sheet4.SearchTest)  Time elapsed: 0.144 s  <<< ERROR!
 java.lang.ArrayIndexOutOfBoundsException: Index 35 out of bounds for length 35
-	at sheet4.Search.shortestPathFromSourceToDestination(Search.java:190)
+	at sheet4.Search.shortestPathFromSourceToDestination(Search.java:189)
 	at sheet4.SearchTest.testShortestPath(SearchTest.java:51)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)

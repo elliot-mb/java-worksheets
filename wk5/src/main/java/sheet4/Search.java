@@ -1,11 +1,10 @@
 package sheet4;
 
-import com.google.common.graph.EndpointPair;
-import com.google.common.graph.ImmutableValueGraph;
+import com.google.common.graph.*;
 import com.google.common.graph.ImmutableValueGraph.Builder;
-import com.google.common.graph.ValueGraphBuilder;
 
 
+import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -135,12 +134,11 @@ public class Search {
 
 		//Object sourceNode = nodeDict.get(source);
 		nodeDict = populate(nodeDict, graph, source);
-
-		Object currentNode = source;
-
 		
 		int pos = 0;
 		Integer[] visitedNodes = new Integer[35];
+		visitedNodes[0] = source; //including in visiteds to remove check from loop if the node isn't the source
+		Object currentNode = source;
 		Integer min = Integer.MAX_VALUE;
 		Integer bestNode = -1;
 		while ((Integer) currentNode != destination) {
@@ -163,7 +161,7 @@ public class Search {
 				//gets the current node's min value from paths
 				
 				//System.out.println("Min is " + min);
-				if(graph.edgeValue((Integer) node, (Integer) currentNode).isPresent() && Search.searchList(visitedNodes, (Integer)node) == false && (Integer)node != source) {
+				if(graph.edgeValue((Integer) node, (Integer) currentNode).isPresent() && !Search.searchList(visitedNodes, (Integer)node)){ // no need to check if we add the start node to visited nodes && (Integer)node != source*/) {
 					System.out.println("Min so far is " + min); //just gonna pop this in here to know its talking about nodes its still to visit
 
 					//gets distance between node and current node
@@ -178,7 +176,7 @@ public class Search {
 						bestNode = (Integer) node;
 						System.out.println("Best Node is " + bestNode);
 					}
-
+					
 					if (searchList(visitedNodes, bestNode)) min = distance;
 					//update table respectively
 					if (distance < (nodeDict.get((Integer) node).get(0))){
@@ -202,6 +200,34 @@ public class Search {
 		return path;
 
 	}
+
+//	static List<Integer> shortestPathFromSourceToDestinatioN(
+//			ImmutableValueGraph<Integer, Integer> graph,
+//			Integer source,
+//			Integer destination) {
+//
+//		// trying my hand for practise and understanding (https://youtu.be/pVfj6mxhdMw)
+//
+//		//shortest distance from the source to every node
+//		ArrayList<Integer>
+//				node     = new ArrayList<Integer>(),
+//				shortest = new ArrayList<Integer>(),
+//				previous = new ArrayList<Integer>(),
+//				visited  = new ArrayList<Integer>(),
+//				successor = new ArrayList<Integer>();
+//		Integer current = source; //current node
+//		int dist = Integer.MAX_VALUE; //best distance to the next node
+//		node.set(0, source);
+//		shortest.set(0, 0);
+//		previous.set(0, null);
+//		node.addAll(graph.nodes());
+//		while(current != destination){
+//			successor.addAll(graph.successors(current));
+//			for(Integer s : successor){
+//				if(graph.edgeValue(current, s) );
+//			}
+//		}
+//	}
 
 	// reads in a graph stored in plan text, not part of any question but feel free to study at how
 	// a graph is constructed
