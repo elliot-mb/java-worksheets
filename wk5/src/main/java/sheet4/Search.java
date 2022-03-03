@@ -131,7 +131,7 @@ public class Search {
 			Integer destination) {
 		Dictionary<Integer, ArrayList<Integer>> nodeDict = new Hashtable<Integer, ArrayList<Integer>>();
 
-		System.out.println("I WANT TO GO TO " + destination + ", STARTING AT " + source);
+		//System.out.println("I WANT TO GO TO " + destination + ", STARTING AT " + source);
 
 		//Object sourceNode = nodeDict.get(source);
 		nodeDict = populate(nodeDict, graph, source);
