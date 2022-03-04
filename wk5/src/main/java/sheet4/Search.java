@@ -154,7 +154,7 @@ public class Search {
 			}
 
 			System.out.println("");
-
+			Integer localMin = Integer.MAX_VALUE; //will select best immediate node
 			for (Object node : succ) {
 				
 				//gets the current node's min value from paths
