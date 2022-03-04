@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -132,21 +133,22 @@ public class Search {
 
 		//System.out.println("I WANT TO GO TO " + destination + ", STARTING AT " + source);
 
-		//Object sourceNode = nodeDict.get(source);
 		nodeDict = populate(nodeDict, graph, source);
 		
 		int pos = 0;
 		Integer[] visitedNodes = new Integer[35];
-		Object currentNode = source;
+		Integer currentNode = source;
 		Integer min = Integer.MAX_VALUE;
 		Integer bestNode = -1;
-		while ((Integer) currentNode != destination) {
+		ArrayList<Integer> endPoints = new ArrayList<>(); //places we know at least one distance to (we've calculated at least once)
+		endPoints.add(source);
+		while (currentNode != destination) {
 			//min = Integer.MAX_VALUE;
 
 			System.out.println(currentNode);
 			
 			//getting successors
-			Object[] succ = graph.successors((Integer) currentNode).toArray();
+			Object[] succ = graph.successors(currentNode).toArray();
 			//System.out.println(succ); just prints a memory address
 
 			for (Object node : succ) {
@@ -154,50 +156,49 @@ public class Search {
 			}
 
 			System.out.println("");
-			Integer localMin = Integer.MAX_VALUE; //will select best immediate node
 			for (Object node : succ) {
-				
-				//gets the current node's min value from paths
-				
-				//System.out.println("Min is " + min);
-				if(graph.edgeValue((Integer) node, (Integer) currentNode).isPresent() && !Search.searchList(visitedNodes, (Integer)node) && (Integer)node != source) {
-					System.out.println("Min so far is " + min); //just gonna pop this in here to know its talking about nodes its still to visit
+				if(graph.edgeValue((Integer) node, currentNode).isPresent() && !Search.searchList(visitedNodes, (Integer)node) && (Integer)node != source) {
+					Integer edgeVal = graph.edgeValue((Integer) node, currentNode).get();
+					Integer distance = (nodeDict.get(currentNode).get(0) + edgeVal);
 
-					//gets distance between node and current node
-					Integer edgeVal = graph.edgeValue((Integer) node, (Integer) currentNode).get();
-					//calculates the total distance (incl. previous path)
-					Integer distance = (nodeDict.get((Integer) currentNode).get(0) + edgeVal);
-					System.out.println("Node: " + (Integer)node + " Edge Value: " + edgeVal +  " Distance: " + distance + " Predecessor: " + nodeDict.get((Integer) node).get(1));
-					//if this is less than the current key value held in the node, replace and is now
-					//best node
-					if(distance < min){
-						min = distance;
-						bestNode = (Integer) node;
-						System.out.println("Best Node is " + bestNode);
-					}
+					//only update the distance if its shorter than our shortest to that node
+					if(distance < nodeDict.get(node).get(0)) { nodeDict.put((Integer) node, new ArrayList<Integer>(Arrays.asList(distance, currentNode))); }
+					//all endpoints can be distinct
+					if(!endPoints.contains((Integer) node)) { endPoints.add((Integer) node); } //add this node to the endpoints list
 
-					if (searchList(visitedNodes, bestNode)) min = distance;
-					//update table respectively
-					if (distance < (nodeDict.get((Integer) node).get(0))){
-						nodeDict.put((Integer) node, new ArrayList<Integer>(Arrays.asList(distance, (Integer) currentNode)));
-					}
-					
+					System.out.println("Node: " + node + ", Edge Value: " + edgeVal +  ", Distance: " + distance + ", Predecessor: " + nodeDict.get(node).get(1));
 				}
 			}
-			visitedNodes[pos] = (Integer)currentNode;
-			currentNode = bestNode;
+			visitedNodes[pos] = currentNode;
+
+			endPoints.removeIf(Predicate.isEqual(currentNode)); //removes current node (its been fully visited)
+			Integer localBestDist = Integer.MAX_VALUE; Integer d;
+			ArrayList<Integer> debugDistances = new ArrayList<Integer>();
+			for(Integer node : endPoints){// selects the shortest distance of all endpoints bar the ones already visited
+				d = nodeDict.get(node).get(0);
+				debugDistances.add(d);
+				if(d < localBestDist){
+					currentNode = node;
+					localBestDist = d;
+				}
+			}
+			System.out.println("Endpoint nodes: " + endPoints);
+			System.out.println("Distances from source: " + debugDistances);
+			//currentNode = bestNode;
 			pos++;
 		}
 
 		List<Integer> path = new ArrayList<Integer>();
 
-		while (currentNode != source) {
-			path.add((Integer) currentNode);
+		path.add(0, currentNode);
+		while (true) {
 			currentNode = nodeDict.get(currentNode).get(1);
+			path.add(0, currentNode);
+			if(Objects.equals(currentNode, source)) {
+				System.out.println("Path: " +path);
+				return path;
+			} //needs to include source
 		}
-
-		return path;
-
 	}
 
 //	static List<Integer> shortestPathFromSourceToDestinatioN(
