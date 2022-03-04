@@ -149,7 +149,6 @@ public class Search {
 			
 			//getting successors
 			Object[] succ = graph.successors(currentNode).toArray();
-			//System.out.println(succ); just prints a memory address
 
 			for (Object node : succ) {
 				System.out.print(node + " ");
