@@ -137,7 +137,6 @@ public class Search {
 		
 		int pos = 0;
 		Integer[] visitedNodes = new Integer[35];
-		visitedNodes[0] = source; //including in visiteds to remove check from loop if the node isn't the source
 		Object currentNode = source;
 		Integer min = Integer.MAX_VALUE;
 		Integer bestNode = -1;
@@ -161,7 +160,7 @@ public class Search {
 				//gets the current node's min value from paths
 				
 				//System.out.println("Min is " + min);
-				if(graph.edgeValue((Integer) node, (Integer) currentNode).isPresent() && !Search.searchList(visitedNodes, (Integer)node)){ // no need to check if we add the start node to visited nodes && (Integer)node != source*/) {
+				if(graph.edgeValue((Integer) node, (Integer) currentNode).isPresent() && !Search.searchList(visitedNodes, (Integer)node) && (Integer)node != source) {
 					System.out.println("Min so far is " + min); //just gonna pop this in here to know its talking about nodes its still to visit
 
 					//gets distance between node and current node
@@ -176,7 +175,7 @@ public class Search {
 						bestNode = (Integer) node;
 						System.out.println("Best Node is " + bestNode);
 					}
-					
+
 					if (searchList(visitedNodes, bestNode)) min = distance;
 					//update table respectively
 					if (distance < (nodeDict.get((Integer) node).get(0))){
