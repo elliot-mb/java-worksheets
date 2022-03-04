@@ -21,4 +21,5 @@ public class SearchRunner {
         system.createGraph();
         Search.shortestPathFromSourceToDestination(system.graph, 1, 34);
     }
+
 }
